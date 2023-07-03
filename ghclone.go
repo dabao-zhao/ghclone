@@ -10,16 +10,21 @@ import (
 var gitProxy = "https://ghproxy.com/"
 
 func main() {
-	args := os.Args
+	osArgs := os.Args
 
-	if len(args) != 2 {
+	if len(osArgs) < 2 {
 		fmt.Println("git repo is empty")
 		return
 	}
 
-	gitRepo := args[1]
+	gitRepo := osArgs[1]
 
-	cmd := exec.Command("git", "clone", "--progress", gitProxy+gitRepo)
+	commandArgs := []string{"clone", "--progress", gitProxy + gitRepo}
+	commandArgs = append(commandArgs, osArgs[2:]...)
+
+	cmd := exec.Command("git", commandArgs...)
+	fmt.Println(cmd.String())
+
 	stderr, err := cmd.StderrPipe()
 	if err != nil {
 		fmt.Println(err)
