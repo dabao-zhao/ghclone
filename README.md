@@ -3,7 +3,7 @@
 ### 安装
 
 ```shell
-go install github.com/dabao-zhao/ghclone
+go install github.com/dabao-zhao/ghclone@latest
 ```
 
 ### 使用 
